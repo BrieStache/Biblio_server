@@ -112,7 +112,39 @@ public class DataManager {
 		return transOk;
 	}
 	
+	//return mail of the account
+	public String getMail(int accounId) {
+		factory = this.getSF();
+		session = factory.getCurrentSession();
+		String mail;
+		try {
+			session.beginTransaction();
+			loadData();
+			mail = theAccounts.get(accounId-1).getEmail();
+			
+			session.getTransaction().commit();
+		} finally {
+			factory.close();
+		}
+		return mail;
+	}
 	
+	//return title of the book
+	public String getTitle(int bookId) {
+		factory = this.getSF();
+		session = factory.getCurrentSession();
+		String title;
+		try {
+			session.beginTransaction();
+			loadData();
+			title = theBooks.get(bookId-1).getTitle();
+			
+			session.getTransaction().commit();
+		} finally {
+			factory.close();
+		}
+		return title;
+	}
 	//Return a book
 	public boolean returnBook(int accountId,int bookId) {
 		boolean transOk;

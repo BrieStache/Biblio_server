@@ -13,14 +13,15 @@ public class MqttListener implements MqttCallback {
 
 	MqttClient client;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		new MqttListener().start();
+		//Class.forName("biblio_server.mqtt.receiver");
 	}
 
 	public void start() {
 		try {
-			client = new MqttClient("tcp://localhost:1883", "Sending", new MemoryPersistence());
+			client = new MqttClient("tcp://localhost:1883", "Library", new MemoryPersistence());
 			
 			client.connect();
 			client.setCallback(this);

@@ -41,14 +41,13 @@ public class MessageManager {
 		msgReader reader = new msgReader();
 		msgWriter writer = new msgWriter();
 		DataManager dM = new DataManager();
-		
+		System.out.println(receivedMessage);
 		//requestId Reader
 		requestId = reader.getRequestId(receivedMessage);
 		receivedMessage = receivedMessage.substring(receivedMessage.indexOf(";")+1);
 		receivedMessage.trim();
 		
 		
-		System.out.println(receivedMessage);
 		switch (requestId) {
 		case 1://Connection Request
 			
@@ -93,6 +92,8 @@ public class MessageManager {
 			
 			returnOk = dM.returnBook(accountId, bookId);
 			
+			
+			
 			MqttSender sender = new MqttSender();
 			sender.sendMessage("Book available ;"+Integer.toString(bookId));
 			break;
@@ -104,6 +105,7 @@ public class MessageManager {
 			bookId = reader.getBookId(receivedMessage);
 			
 			reservationOk = dM.createReservation(accountId, bookId);
+			new email_Sender().send(dM.getMail(accountId), dM.getTitle(bookId));
 			break;
 		case 6://Get book or book List
 			accountId = reader.getAccountId(receivedMessage);
