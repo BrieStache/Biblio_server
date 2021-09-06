@@ -1,0 +1,28 @@
+Hello to the library application,
+
+Here's the packages requirement to make sure that the application will be STABLE.
+
+OS : 	debian 11
+
+Java :
+		openjdk-17-jdk
+		penjdk-17-jre
+
+IDE : 	Eclipse
+		Version: 2021-06 (4.20.0)
+		Build id: 20210612-2011
+	
+DB : 	libmariadb-java
+		mariadb-client
+		mariadb-server
+		odbc-mariadb
+		
+Now the Database requirement :
+In the folder Script :
+		Source or copy/paste the content of the file 01-create-user.sql in mysql
+		Source or copy/paste the content of the file 02_biblio_db_creating_script.sql in mysql
+		
+Database created now time to fill the data into the table :
+		Run as Java application the Java class located in the package biblio_server.hibernate.fill_table (AddData.java)
+
+Data added to the Database, good job.
