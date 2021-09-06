@@ -92,6 +92,9 @@ public class MessageManager {
 			bookId = reader.getBookId(receivedMessage);
 			
 			returnOk = dM.returnBook(accountId, bookId);
+			
+			MqttSender sender = new MqttSender();
+			sender.sendMessage("Book available ;"+Integer.toString(bookId));
 			break;
 		case 5://create a reservation for a book
 			accountId = reader.getAccountId(receivedMessage);
